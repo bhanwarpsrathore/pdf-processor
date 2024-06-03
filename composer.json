@@ -1,0 +1,60 @@
+{
+    "name": "bhanwarpsrathore/pdf-processor",
+    "description": "PDF processing tool for PHP and Laravel applications",
+    "keywords": [
+        "pdf",
+        "pdf-compressor",
+        "pdf-optimizer",
+        "compress-pdf",
+        "tiny-pdf",
+        "laravel",
+        "php",
+        "ghostscript"
+    ],
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/bhanwarpsrathore/pdf-processor/issues",
+        "source": "https://github.com/bhanwarpsrathore/pdf-processor"
+    },
+    "authors": [
+        {
+            "name": "Pradeep Singh",
+            "email": "bhanwarpsrathore@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "ext-fileinfo": "*",
+        "psr/log": "^3.0",
+        "symfony/process": "^6.2|^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0",
+        "orchestra/testbench": "^v8.19.0|^9.0",
+        "league/flysystem-aws-s3-v3": "^3.0",
+        "pestphp/pest": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bhanwarpsrathore\\PdfProcessor\\": "src/"
+        },
+        "files": [
+            "src/Helpers/Utils.php"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bhanwarpsrathore\\PdfProcessor\\PdfProcessorServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
