@@ -60,17 +60,17 @@ class Export {
         return $this;
     }
 
-    public function optimize(string $pathToOptimizedFile): ProcessResult {
+    public function process(string $pathToProcessedFile): ProcessResult {
         $disk = Disk::make($this->disk);
 
         $commands = $this->command();
         $input = $this->file->getPath();
 
         if ($this->queue->enabled) {
-            return $this->optimizeOnQueue(
+            return $this->processOnQueue(
                 $commands,
                 $input,
-                $pathToOptimizedFile,
+                $pathToProcessedFile,
                 $disk
             );
         }
@@ -81,11 +81,11 @@ class Export {
             ->execute(
                 $commands,
                 $input,
-                $pathToOptimizedFile
+                $pathToProcessedFile
             );
     }
 
-    private function optimizeOnQueue(array $commands, string $input, string $output, Disk $disk): ProcessResult {
+    private function processOnQueue(array $commands, string $input, string $output, Disk $disk): ProcessResult {
         $data = PdfProcessorJobData::make(
             commands: $commands,
             input: $input,

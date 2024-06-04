@@ -23,7 +23,7 @@ trait PdfProcessorProperties {
      * @var string[]
      */
     private array $options = [
-        '-sDEVICE=pdfwrite', '-dNOPAUSE', '-dQUIET', '-dBATCH'
+        '-sDEVICE=pdfwrite', '-dSAFER', '-dNOPAUSE', '-dQUIET', '-dBATCH'
     ];
 
     /**
@@ -31,15 +31,11 @@ trait PdfProcessorProperties {
      */
     private array $extraOptions = [];
 
-
-    #[Option('-dPDFSETTINGS')]
-    private PdfSettings $pdfSettings = PdfSettings::SCREEN;
-
     #[Option('-dFastWebView')]
     private ?bool $fastWebView = null;
 
     #[Option('-dDetectDuplicateImages')]
-    private bool $detectDuplicateImages = true;
+    private ?bool $detectDuplicateImages = null;
 
     #[Option('-dPreserveMarkedContent')]
     private ?bool $preserveMarkedContent = null;
@@ -149,8 +145,20 @@ trait PdfProcessorProperties {
     #[Option('-dPassThroughJPXImages')]
     private ?bool $passThroughJpxImages = null;
 
+    #[Option('-dFirstPage')]
+    private ?int $firstPage = null;
+
+    #[Option('-dLastPage')]
+    private ?int $lastPage = null;
+
+    #[Option('-sPageList')]
+    private ?string $pageList = null;
+
     #[Option('-dCompatibilityLevel')]
     private ?CompatibilityLevel $compatibilityLevel = null;
+
+    #[Option('-dPDFSETTINGS')]
+    private ?PdfSettings $pdfSettings = null;
 
     #[Option('-sProcessColorModel')]
     private ?ProcessColorModel $processColorModel = null;
@@ -611,6 +619,20 @@ trait PdfProcessorProperties {
     }
 
     /**
+     * #### FirstName
+     * 
+     * Begin on the designated page of the document. Pages of all documents in PDF collections are numbered sequentionally.
+     * 
+     * @param int $page
+     * @return PdfProcessorProperties|PdfProcessor
+     */
+    public function firstPage(int $page): self {
+        $this->firstPage = $page;
+
+        return $this;
+    }
+
+    /**
      * #### GrayImageDepth
      *
      * Specifies the number of bits per sample in the image. The following values are valid:
@@ -689,6 +711,20 @@ trait PdfProcessorProperties {
      */
     public function grayImageResolution(int $resolution): self {
         $this->grayImageResolution = $resolution;
+
+        return $this;
+    }
+
+    /**
+     * #### LastPage
+     * 
+     * Stop after the designated page of the document. Pages of all documents in PDF collections are numbered sequentionally.
+     * 
+     * @param int $page
+     * @return PdfProcessorProperties|PdfProcessor
+     */
+    public function lastPage(int $page): self {
+        $this->lastPage = $page;
 
         return $this;
     }
@@ -845,6 +881,20 @@ trait PdfProcessorProperties {
      */
     public function monoImageResolution(int $resolution): self {
         $this->monoImageResolution = $resolution;
+
+        return $this;
+    }
+
+    /**
+     * #### PageList
+     * 
+     * Stop after the designated page of the document. Pages of all documents in PDF collections are numbered sequentionally.
+     * 
+     * @param string $pageranges
+     * @return PdfProcessorProperties|PdfProcessor
+     */
+    public function pageList(string $pageranges): self {
+        $this->pageList = $pageranges;
 
         return $this;
     }

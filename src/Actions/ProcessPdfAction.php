@@ -36,7 +36,7 @@ class ProcessPdfAction {
     }
 
     public function execute(array $command, string $input, string $output): ProcessResult {
-        $this->logger->info('Start optimizing');
+        $this->logger->info('Start processing');
 
         $originalOutput = $output;
         [$input, $output] = $this->io($input, $output);
@@ -130,7 +130,7 @@ class ProcessPdfAction {
     private function store(string $output, string $originalOutput): void {
         if ($this->outputDisk?->getAdapter()) {
             if (!$this->outputDisk->isLocalDisk()) {
-                $this->logger->info('Store optimized file to remote disk', [
+                $this->logger->info('Store processes file to remote disk', [
                     'path' => $originalOutput
                 ]);
 
