@@ -28,14 +28,14 @@ class PdfProcessor {
         return $this;
     }
 
-    public function optimize(string $pathToFile, string $pathToOptimizedFile): ProcessResult {
+    public function process(string $pathToFile, string $pathToProcessedFile): ProcessResult {
         return ProcessPdfAction::init()
             ->logger($this->logger)
             ->setTimeout($this->timeout)
             ->execute(
                 command: $this->command(),
                 input: $pathToFile,
-                output: $pathToOptimizedFile
+                output: $pathToProcessedFile
             );
     }
 }
