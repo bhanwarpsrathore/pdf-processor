@@ -116,7 +116,13 @@ class ProcessPdfAction {
             }
 
             if (!$exists) {
-                $command[] = $input;
+                /**
+                 * For example: "file1.pdf file2.pdf
+                 */
+                $multiple_inputs = explode(" ", $input);
+                foreach ($multiple_inputs as $value) {
+                    $command[] = $value;
+                }
             }
         }
 
